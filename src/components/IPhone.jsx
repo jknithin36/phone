@@ -5,29 +5,26 @@ License: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 Source: https://sketchfab.com/3d-models/apple-iphone-15-pro-max-black-df17520841214c1792fb8a44c6783ee7
 Title: Apple iPhone 15 Pro Max Black
 */
-
 import * as THREE from "three";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useGLTF, useTexture } from "@react-three/drei";
 
 function Model(props) {
-  const { nodes, materials } = useGLTF("public/models/scene.glb");
-
+  const { nodes, materials } = useGLTF("/phone/models/scene.glb");
   const texture = useTexture(props.item.img);
 
   useEffect(() => {
-    Object.entries(materials).map((material) => {
-      // these are the material names that can't be changed color
+    Object.entries(materials).forEach(([key, material]) => {
       if (
-        material[0] !== "zFdeDaGNRwzccye" &&
-        material[0] !== "ujsvqBWRMnqdwPx" &&
-        material[0] !== "hUlRcbieVuIiOXG" &&
-        material[0] !== "jlzuBkUzuJqgiAK" &&
-        material[0] !== "xNrofRCqOXXHVZt"
+        key !== "zFdeDaGNRwzccye" &&
+        key !== "ujsvqBWRMnqdwPx" &&
+        key !== "hUlRcbieVuIiOXG" &&
+        key !== "jlzuBkUzuJqgiAK" &&
+        key !== "xNrofRCqOXXHVZt"
       ) {
-        material[1].color = new THREE.Color(props.item.color[0]);
+        material.color = new THREE.Color(props.item.color[0]);
       }
-      material[1].needsUpdate = true;
+      material.needsUpdate = true;
     });
   }, [materials, props.item]);
 
@@ -258,4 +255,3 @@ function Model(props) {
 
 export default Model;
 
-useGLTF.preload("public/models/scene.glb");
