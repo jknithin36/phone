@@ -10,7 +10,7 @@ import React, { useEffect } from "react";
 import { useGLTF, useTexture } from "@react-three/drei";
 
 function Model(props) {
-  const { nodes, materials } = useGLTF("/phone/models/scene.glb");
+  const { nodes, materials } = useGLTF("/phone/public/models/scene.glb");
   const texture = useTexture(props.item.img);
 
   useEffect(() => {
@@ -255,3 +255,4 @@ function Model(props) {
 
 export default Model;
 
+useGLTF.preload("/phone/public/models/scene.glb");
